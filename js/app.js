@@ -24,6 +24,11 @@
       if (event.target.parentElement.classList.contains("store-item-icon")) {
         // Adding full path of the product image in variable
         let fullPath = event.target.parentElement.previousElementSibling.src;
+        // Getting the image index when clicking on it
+        let pos = fullPath.indexOf("img") + 3;
+        let partPath = fullPath.slice(pos);
+
+        console.log(partPath);
       }
     });
   });
