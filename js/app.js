@@ -28,7 +28,27 @@
         let pos = fullPath.indexOf("img") + 3;
         let partPath = fullPath.slice(pos);
 
-        console.log(partPath);
+        // Creating object for adding data that is selected to cart
+        const item = {};
+
+        // Adding properties - in this case images to cart as template string
+        item.img = `img-cart${partPath}`;
+
+        // Adding items name to the cart
+        let name =
+          event.target.parentElement.parentElement.nextElementSibling
+            .children[0].children[0].textContent;
+        // Adding this variable as property for 'item object'
+        item.name = name;
+
+        // Adding items price to the cart
+        let price =
+          event.target.parentElement.parentElement.nextElementSibling
+            .children[0].children[1].textContent;
+        // Adding this variable as property for 'item object'
+        item.price = price;
+
+        console.log(item);
       }
     });
   });
