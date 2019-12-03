@@ -45,11 +45,62 @@
         let price =
           event.target.parentElement.parentElement.nextElementSibling
             .children[0].children[1].textContent;
-        // Adding this variable as property for 'item object'
-        item.price = price;
 
-        console.log(item);
+        // Adding new variable for price without a dollar sign
+        let finalPrice = price.slice(1).trim();
+        // Adding this variable as property for 'item object'
+        item.price = finalPrice;
+
+        // Creating a div element to add some items to the cart
+        const cartItem = document.createElement("div");
+        cartItem.classList.add(
+          "cart-item",
+          "d-flex",
+          "justify-content-between",
+          "text-capitalize",
+          "my-3"
+        );
+
+        // Creating template literal for the item added to the cart
+        cartItem.innerHTML = `
+          <img src="${item.img}" class="img-fluid rounded-circle" id="item-img" alt="">
+          <div class="item-text">
+
+            <p id="cart-item-title" class="font-weight-bold mb-0">${item.name}</p>
+            <span>$</span>
+            <span id="cart-item-price" class="cart-item-price" class="mb-0">${item.price}</span>
+          </div>
+          <a href="#" id='cart-item-remove' class="cart-item-remove">
+            <i class="fas fa-trash"></i>
+          </a>
+        </div>
+        `;
+
+        // Selecting a cart
+        const cart = document.getElementById("cart");
+        // Variable for total in the cart
+        const total = document.querySelector(".cart-total-container");
+
+        // This is method to insert data into cart that are selected
+        cart.insertBefore(cartItem, total);
+        alert("Item is added to the cart");
+
+        // Using the function for showing total value for the items added to the cart
+        showTotals();
       }
     });
   });
+
+  // Creating the function for showing total value for the items added to the cart
+  function showTotals() {
+    // First we create an empty array to store data for totals
+    const total = [];
+    // Selecting price for the items
+    const items = document.querySelectorAll(".cart-item-price");
+
+    // Loop through the items and pushing items to that empty array
+    items.forEach(function(item) {
+      total.push(parseFloat(item.textContent));
+    });
+  }
 })();
