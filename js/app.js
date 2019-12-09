@@ -102,5 +102,19 @@
     items.forEach(function(item) {
       total.push(parseFloat(item.textContent));
     });
+
+    // Showing total spent money in the cart
+    // Using reduce function - first param is start value and second is looping item
+    const totalMoney = total.reduce(function(total, item) {
+      total += item;
+      return total;
+    }, 0);
+    // Solving the many decimals problem
+    const finalMoney = totalMoney.toFixed(2);
+
+    // Adding total data into cart total and displaying it
+    document.getElementById("cart-total").textContent = finalMoney;
+    document.querySelector(".item-total").textContent = finalMoney;
+    document.getElementById("item-count").textContent = total.length;
   }
 })();
